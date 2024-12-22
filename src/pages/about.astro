@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-
+import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "About Me";
 
 const identity = {
@@ -13,7 +13,7 @@ const identity = {
 const skills = ["Usability testing", "R", "SQL"];
 
 const happy = true;
-const finished = false;
+const finished = true;
 const goal = 3;
 
 const skillColor = "navy";
@@ -21,49 +21,38 @@ const fontWeight = "bold";
 const textCase = "uppercase";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-        <style define:vars={{skillColor, fontWeight, textCase}}>
-            h1 {
-              color: rgb(193, 34, 193);
-              font-size: 4rem;
-            }
-            .skill {
-                color: var(--skillColor);
-                font-weight: var(--fontWeight);
-                text-transform: var(--textCase);
-            }
-          </style>
-	</head>
-	<body>
-<a href="/">Home</a>
-<a href="/about/">About</a>
-<a href="/blog">Blog</a>
+<BaseLayout pageTitle={pageTitle}>
 
-<h1>{pageTitle}</h1>
-<h2>... and my new Astro site!</h2>
-        <p> this is just me typing away to see it render</p>
-        <p> typey type type</p>
-        <p> Here are a few facts about me: </p>
-        <ul> 
-            <li> My name is {identity.firstName}.</li>
-            <li> I live in {identity.country} and I work as a {identity.occupation} </li>
-        </li> {identity.hobbies.length >= 2 &&
-          <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
-        }
-        </ul>
-        <p>My skills are:</p>
-        <ul>
-        {skills.map((skill) => <li class="skill">{skill}</li>)}
-        </ul>
+  <body>
+    <style is:global define:vars={{skillColor, fontWeight, textCase}}>
+      h1 {
+        color: rgb(193, 34, 193);
+        font-size: 4rem;
+      }
+      .skill {
+          color: var(--skillColor);
+          font-weight: var(--fontWeight);
+          text-transform: var(--textCase);
+      }
+    </style>
+     <p> this is just me typing away to see it render</p>
+     <p> typey type type</p>
+     <p> Here are a few facts about me: </p>
+     <ul> 
+         <li> My name is {identity.firstName}.</li>
+         <li> I live in {identity.country} and I work as a {identity.occupation} </li>
+     </li> {identity.hobbies.length >= 2 &&
+       <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+     }
+     </ul>
+     <p>My skills are:</p>
+     <ul>
+     {skills.map((skill) => <li class="skill">{skill}</li>)}
+     </ul>
 
-        {happy && <p>I am happy to be learning Astro!</p>}
-        {finished && <p>I finished this tutorial!</p>}
-        {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
-	</body>
-</html>
+     {happy && <p>I am happy to be learning Astro!</p>}
+     {finished && <p>I finished this tutorial!</p>}
+     {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+
+    </body>
+</BaseLayout>
